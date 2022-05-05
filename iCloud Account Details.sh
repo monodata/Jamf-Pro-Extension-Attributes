@@ -15,7 +15,10 @@ if [[ -e "/Users/$loggedInUser/Library/Preferences/MobileMeAccounts.plist" ]]; t
 	if [[ "$iCloudStatus" = "true" ]]; then
 		AccountID=$("$plistBud" -c "print :Accounts:0:AccountID" /Users/$loggedInUser/Library/Preferences/MobileMeAccounts.plist 2> /dev/null)
 		DisplayName=$("$plistBud" -c "print :Accounts:0:DisplayName" /Users/$loggedInUser/Library/Preferences/MobileMeAccounts.plist 2> /dev/null)
-		iCloudStatus="$DisplayName, $AccountID"
+		
+		# Stripping back for just the AppleID
+		#iCloudStatus="$DisplayName, $AccountID"
+		iCloudStatus="$AccountID"
 	fi
 	if [[ "$iCloudStatus" = "false" ]] || [[ -z "$iCloudStatus" ]]; then
 		iCloudStatus="Disabled"
